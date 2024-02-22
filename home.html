@@ -96,6 +96,7 @@
     <script>
 	function initList(element)
 	{
+	    alert("started init on " + element.id);
 	    const fs = require('fs');
 	    const readline = require('readline');
 	    
@@ -130,17 +131,17 @@
 	}
 	function addIngredient(element)
 	{
-	    myPopup.classList.add(element.id);
-	    myPopup.classList.add("show");
+	    document.getElementById("myPopup").classList.add(element.id);
+	    document.getElementById("myPopup").classList.add("show");
 	}
 	funcion closeAddIngredient()
 	{
-	    myPopup.classList.remove("show");
-	    myPopup.classList.remove(myPopup.classList.get(1));
+	    document.getElementById("myPopup").classList.remove("show");
+	    document.getElementById("myPopup").classList.remove(myPopup.classList.get(1));
 	}
 	function add(form)
 	{
-	    var list = document.getElementById(myPopup.classList.get(1)).children.list.children[0];
+	    var list = document.getElementById(document.getElementById("myPopup").classList.get(1)).children.list.children[0];
 	    var ingredient = document.createElement("li", {id: "ingredient"});
 	    
 	    var contents = '<div id="name">' + form.name + '</div>
@@ -156,7 +157,7 @@
 	    list.appendChild(ingredient);
 
 	    var fs = require('fs');
-	    fs.appendFile(myPopup.classList.get(1) + ".txt", form.name + "," + form.date + "," + form.amount, 
+	    fs.appendFile(document.getElementById("myPopup").classList.get(1) + ".txt", form.name + "," + form.date + "," + form.amount, 
 		    function(err) {if(err) {alert("Error adding " + form.name);}});
 
 	    closeAddIngredient();	
