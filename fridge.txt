@@ -1,0 +1,6 @@
+radish, 2/20/24, 5
+potato, 2/15/24, 12
+garlic, 2/15/24, 4
+brisket, 2/20/24, 7lb
+jalapeno, 2/15/24, 6
+bok choi, 2/15/24, 1
