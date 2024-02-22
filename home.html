@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen and (orientation:portrait)"/>
+    <link rel="stylesheet" type="text/css" href="landscape.css" media="screen and (orientation:landscape)"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title> fridgE </title>
+    <style>
+	.selected { color: green; }
+	.popup {
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: none;
+        }
+        .popup-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888888;
+            width: 30%;
+            font-weight: bolder;
+        }
+        .popup-content button {
+            display: block;
+            margin: 0 auto;
+        }
+        .show {
+            display: block;
+        }
+        h1 {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Home page -->
+    <div id="fridge">
+        <div id="head">
+	    <header>Fridge</header>
+	    <button id="addIngredient" onclick="addIngredient(document.getElementById("fridge"));">Add Ingredient</button> 	
+        </div>
+	<div id="list">
+		<ul onLoad="initList(document.getElementById("fridge"))";>
+		</ul> 	
+	</div>
+    </div>
+    <div id="pantry">
+        <div id="head">
+	    <header>Pantry</header>
+	    <button id="addIngredient" onclick="addIngredient(document.getElementById("pantry"));">Add Ingredient</button> 	
+        </div>
+	<div id="list">
+		<ul onLoad="initList(document.getElementById("pantry"))";>
+		</ul> 	
+	</div>
+    </div>
+    <div id="foot">
+	<div id="selected" visibility="hidden">
+	    <ul id="fridge"></ul>
+	    <ul id="pantry"></ul>
+	</div>
+	<button id="remove" onClick="removeIngredients(foot.children[0])">Remove</button>
+	<button id="search" onClick="searchIngredients(foot.children[0])">Search Recipe</button>
+    </div>
+
+    <!-- Add Ingredient Popup -->
+    <div id="myPopup" class="popup">
+	<div class="popup-content">
+	    <h1 style="color:green;">
+		Add Ingredient
+	    </h1>
+	    <form method="post" id="addForm">             
+		<label for="name">Ingredient Name:</label>
+		<div class="error" id="name-error">Name is a required field.</div>
+		<input type="text" name="name" id="name">	    	
+
+		<label for="date">Date:</label>
+		<input type="text" name="date" id="date">
+
+		<label for="amount">Amount:</label>
+		<input type="text" name="amount" id="amount">
+
+		<input type="submit" value="Add" onclick="add(document.getElementById("addForm");">  
+		<div class="back" onclick="closeAddIngredient();">Back</div>
+	    </form> 
+	</div> 
+    </div>
+    <script>
+	function initList(element)
+	{
+	    const fs = require('fs');
+	    const readline = require('readline');
+	    
+	    const readStream = fs.createReadStream(element.id + ".txt", 
+		function(err) {if(err) {alert("Cannot read " + element.id + ".txt");}});
+	    const readInterface = readline.createInterface({
+		input: readStream,
+		output: process.stdout,
+		console: false});
+
+	    var list = element.children.list.children[0];
+	    readInterface.on('line', function(line){
+	    	var ingredient = document.createElement("li", {id: "ingredient"});
+	    	
+		var name = line.substring(0, line.indexOf(","));
+		line = line.substring(line.indexOf(",") + 1, line.length);
+		var date = line.substring(0, line.indexOf(","));
+		var amount = line.substring(line.indexOf(",") + 1, line.length);			    	
+
+		var contents = '<div id="name">' + name + '</div>
+			<div id="date">' + date + '</div>
+			<div id="amount">
+			    <button id="-" onclick="minuselect(amount.children.value)">-</button> 
+			    <p id="value">' + amount + '</p>
+	    		    <button id="+" onclick="pluselect(amount.children.value)">+</button>
+			    <button id="o" onclick="select(ingredient)">o</button>
+			</div>';
+
+		ingredient.innerHTML = contents;
+	        list.appendChild(ingredient);
+	    });
+	}
+	function addIngredient(element)
+	{
+	    myPopup.classList.add(element.id);
+	    myPopup.classList.add("show");
+	}
+	funcion closeAddIngredient()
+	{
+	    myPopup.classList.remove("show");
+	    myPopup.classList.remove(myPopup.classList.get(1));
+	}
+	function add(form)
+	{
+	    var list = document.getElementById(myPopup.classList.get(1)).children.list.children[0];
+	    var ingredient = document.createElement("li", {id: "ingredient"});
+	    
+	    var contents = '<div id="name">' + form.name + '</div>
+			<div id="date">' + form.date + '</div>
+			<div id="amount">
+			    <button id="-" onclick="minus(amount.children.value)">-</button> 
+			    <p id="value">' + form.amount + '</p>
+	    		    <button id="+" onclick="plus(amount.children.value)">+</button>
+			    <button id="o" onclick="select(ingredient)">o</button>
+			</div>';
+
+	    ingredient.innerHTML = contents;
+	    list.appendChild(ingredient);
+
+	    var fs = require('fs');
+	    fs.appendFile(myPopup.classList.get(1) + ".txt", form.name + "," + form.date + "," + form.amount, 
+		    function(err) {if(err) {alert("Error adding " + form.name);}});
+
+	    closeAddIngredient();	
+	}
+	function plus(value)
+	{
+	    var val = value.innerHTML;
+	    val = val.replace(/[0-9]*/,parseInt(val.replace(/\D/g, ""))+ 1);
+	    value.innerHTML = val;
+	}
+	function minus(value)
+	{
+	    var val = value.innerHTML;
+	    val = val.replace(/[0-9]*/,parseInt(val.replace(/\D/g, ""))- 1);
+	    value.innerHTML = val;
+	}	
+	function select(ingredient)
+	{
+	    var selected = document.getElementById("foot").children[0].children.namedItem(ingredient.parent.parent.id);
+	    if(!contains(selected, ingredient))
+	    {
+	    	selected.appendChild(ingredient);
+		ingredient.lastChild.lastChild.classList.add("selected");
+	    }
+	    else
+	    {
+	        selected.removeChild(ingredient);
+		ingredient.lastChild.lastChild.classList.remove("selected");
+	    }
+	}
+	function removeIngredients(list)
+	{
+	    remove(list.children[0]);
+	    remove(list.children[1]);
+	}
+	function remove(removelist)
+	{
+	    var list = document.getElementById(removelist.id).children.namedItem("list").children[0];
+	    for(let i = 0; i < list.children.length; i++)
+	    {
+		if(contains(removelist, list.children[i]))
+		{
+		    list.removeChild(list.children[i]);
+		}
+	    }
+	}
+	fucntion contains(list, item)
+	{
+	    const name = item.children[0].innerHTML;
+	    for(let i = 0; i < list.children.length; i++)
+	    {
+		if(name.equals(list.children[i].children[0].innerHTML))
+		{
+		    return true;
+		}
+	    }
+	    return false;
+	}
+</body>
+</html>
