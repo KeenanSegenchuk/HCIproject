@@ -48,7 +48,7 @@
 	    <button id="addIngredient" onclick="addIngredient(document.getElementById("fridge"));">Add Ingredient</button> 	
         </div>
 	<div id="list">
-		<ul onLoad="initList(document.getElementById("fridge"))";>
+		<ul onload="initList(document.getElementById("fridge"))";>
 		</ul> 	
 	</div>
     </div>
@@ -58,7 +58,7 @@
 	    <button id="addIngredient" onclick="addIngredient(document.getElementById("pantry"));">Add Ingredient</button> 	
         </div>
 	<div id="list">
-		<ul onLoad="initList(document.getElementById("pantry"))";>
+		<ul onload="initList(document.getElementById("pantry"))";>
 		</ul> 	
 	</div>
     </div>
@@ -131,6 +131,7 @@
 	}
 	function addIngredient(element)
 	{
+	    alert("addIngredient on " + element.id);
 	    document.getElementById("myPopup").classList.add(element.id);
 	    document.getElementById("myPopup").classList.add("show");
 	}
