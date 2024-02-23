@@ -45,20 +45,20 @@
     <div id="fridge">
         <div id="head">
 	    <header>Fridge</header>
-	    <button id="addIngredient" onclick="addIngredient(document.getElementById("fridge"));">Add Ingredient</button> 	
+	    <button id="addIngredient" onclick="addIngredient(document.getElementById('fridge'));">Add Ingredient</button> 	
         </div>
 	<div id="list">
-		<ul onload="initList(document.getElementById("fridge"))";>
+		<ul onload="initList(document.getElementById('fridge'))";>
 		</ul> 	
 	</div>
     </div>
     <div id="pantry">
         <div id="head">
 	    <header>Pantry</header>
-	    <button id="addIngredient" onclick="addIngredient(document.getElementById("pantry"));">Add Ingredient</button> 	
+	    <button id="addIngredient" onclick="addIngredient(document.getElementById('pantry'));">Add Ingredient</button> 	
         </div>
 	<div id="list">
-		<ul onload="initList(document.getElementById("pantry"))";>
+		<ul onload="initList(document.getElementById('pantry'))";>
 		</ul> 	
 	</div>
     </div>
@@ -67,8 +67,8 @@
 	    <ul id="fridge"></ul>
 	    <ul id="pantry"></ul>
 	</div>
-	<button id="remove" onClick="removeIngredients(foot.children[0])">Remove</button>
-	<button id="search" onClick="searchIngredients(foot.children[0])">Search Recipe</button>
+	<button id="remove" onClick="removeIngredients(document.getElementById('foot').children[0])">Remove</button>
+	<button id="search" onClick="searchIngredients(document.getElementById('foot').children[0])">Search Recipe</button>
     </div>
 
     <!-- Add Ingredient Popup -->
@@ -88,7 +88,7 @@
 		<label for="amount">Amount:</label>
 		<input type="text" name="amount" id="amount">
 
-		<input type="submit" value="Add" onclick="add(document.getElementById("addForm");">  
+		<input type="submit" value="Add" onclick="add(document.getElementById('addForm');">  
 		<div class="back" onclick="closeAddIngredient();">Back</div>
 	    </form> 
 	</div> 
@@ -97,7 +97,6 @@
     <script>
 	function initList(element)
 	{
-	    alert("started init on " + element.id);
 	    const fs = require('fs');
 	    const readline = require('readline');
 	    
@@ -132,7 +131,6 @@
 	}
 	function addIngredient(element)
 	{
-	    alert("addIngredient on " + element.id);
 	    document.getElementById("myPopup").classList.add(element.id);
 	    document.getElementById("myPopup").classList.add("show");
 	}
@@ -146,14 +144,14 @@
 	    var list = document.getElementById(document.getElementById("myPopup").classList.get(1)).children.list.children[0];
 	    var ingredient = document.createElement("li", {id: "ingredient"});
 	    
-	    var contents = '<div id="name">' + form.name + '</div>
-			<div id="date">' + form.date + '</div>
-			<div id="amount">
-			    <button id="-" onclick="minus(amount.children.value)">-</button> 
-			    <p id="value">' + form.amount + '</p>
-	    		    <button id="+" onclick="plus(amount.children.value)">+</button>
-			    <button id="o" onclick="select(ingredient)">o</button>
-			</div>';
+	    var contents = '<div id="name">' + form.name + 
+		'</div><div id="date">' + form.date + 
+		'</div><div id="amount">
+			<button id="-" onclick="minus(amount.children.value)">-</button> 
+			<p id="value">' + form.amount + '</p>
+			<button id="+" onclick="plus(amount.children.value)">+</button>
+			<button id="o" onclick="select(ingredient)">o</button>
+		</div>';
 
 	    ingredient.innerHTML = contents;
 	    list.appendChild(ingredient);
@@ -219,6 +217,5 @@
 	    return false;
 	}
     </script>
-    <p>test></p>
 </body>
 </html>
