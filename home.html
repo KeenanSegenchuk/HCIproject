@@ -37,28 +37,34 @@
         h1 {
             color: green;
         }
+	#block{
+	    wdisplay: flex;
+  	    justify-content: space-between;
+	}
     </style>
 </head>
 
 <body>
     <!-- Home page -->
-    <div id="fridge">
-        <div id="head">
-	    <header>Fridge</header>
-	    <button id="addIngredient" onclick="addIngredient(document.getElementById('fridge'));">Add Ingredient</button> 	
+    <div id="block">
+        <div id="fridge">
+            <div id="head">
+	        <header>Fridge</header>
+	        <button id="addIngredient" onclick="addIngredient(document.getElementById('fridge'));">Add Ingredient</button> 	
+            </div>
+	    <div id="list">
+	    	<ul onload="initList(document.getElementById('fridge'));"></ul> 	
+	    </div>
         </div>
-	<div id="list">
-		<ul onload="initList(document.getElementById('fridge'));"></ul> 	
-	</div>
-    </div>
-    <div id="pantry">
-        <div id="head">
-	    <header>Pantry</header>
-	    <button id="addIngredient" onclick="addIngredient(document.getElementById('pantry'));">Add Ingredient</button> 	
-        </div>
-	<div id="list">
+        <div id="pantry">
+            <div id="head">
+	        <header>Pantry</header>
+	        <button id="addIngredient" onclick="addIngredient(document.getElementById('pantry'));">Add Ingredient</button> 	
+            </div>
+	    <div id="list">
 		<ul onload="initList(document.getElementById('pantry'));"></ul> 
-	</div>
+	    </div>
+        </div>
     </div>
     <div id="foot">
 	<div id="selected" visibility="hidden">
@@ -191,7 +197,7 @@
 		}
 	    }
 	}
-	function contains(list, item)
+	fucntion contains(list, item)
 	{
 	    const name = item.children[0].innerHTML;
 	    for(let i = 0; i < list.children.length; i++)
