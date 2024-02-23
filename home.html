@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="style.css" media="screen and (orientation:portrait)"/>
     <link rel="stylesheet" type="text/css" href="landscape.css" media="screen and (orientation:landscape)"/>
-    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
     <title> fridgE </title>
     <style>
 	.selected { color: green; }
@@ -128,7 +128,7 @@
 	function closeAddIngredient()
 	{
 	    document.getElementById("myPopup").classList.remove("show");
-	    document.getElementById("myPopup").classList.remove(myPopup.classList.get(1));
+	    document.getElementById("myPopup").classList.remove(myPopup.classList[1]);
 	}
 	function add(form)
 	{
@@ -191,7 +191,7 @@
 		}
 	    }
 	}
-	function contains(list, item)
+	fucntion contains(list, item)
 	{
 	    const name = item.children[0].innerHTML;
 	    for(let i = 0; i < list.children.length; i++)
