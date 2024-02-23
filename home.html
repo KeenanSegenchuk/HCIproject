@@ -2,8 +2,6 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css" media="screen and (orientation:portrait)"/>
-    <link rel="stylesheet" type="text/css" href="landscape.css" media="screen and (orientation:landscape)"/>
     <meta name="viewport" content="width=device-width, user-scalable=no"/>
     <title> fridgE </title>
     <style>
@@ -34,8 +32,12 @@
         .show {
             display: block;
         }
+	body {
+	    background-color: white;
+	    font-family: Garamond, serif;
+	}
         h1 {
-            color: green;
+            color: #4e823b;
         }
 	#block { /*body may pose problem depend on you context, there is no better then have a specific parent*/
             white-space: nowrap;
@@ -56,11 +58,18 @@
 	}
 	header{
 	    display: inline-block;
+	    color: #4e823b;
 	}
 	#addIngredient{
 	    display: inline-block;
 	    margin-left: 15px;
-	}	
+	}
+	button{
+	    background-color: #4e823b;	
+	    color: white;
+	    width: 100%;
+            height: 100%;
+	}
     </style>
 </head>
 
