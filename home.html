@@ -48,8 +48,7 @@
 	    <button id="addIngredient" onclick="addIngredient(document.getElementById('fridge'));">Add Ingredient</button> 	
         </div>
 	<div id="list">
-		<ul onload="initList(document.getElementById('fridge'))";>
-		</ul> 	
+		<ul onload="initList(document.getElementById('fridge'));"></ul> 	
 	</div>
     </div>
     <div id="pantry">
@@ -58,8 +57,7 @@
 	    <button id="addIngredient" onclick="addIngredient(document.getElementById('pantry'));">Add Ingredient</button> 	
         </div>
 	<div id="list">
-		<ul onload="initList(document.getElementById('pantry'))";>
-		</ul> 	
+		<ul onload="initList(document.getElementById('pantry'));"></ul> 
 	</div>
     </div>
     <div id="foot">
@@ -127,7 +125,7 @@
 	    document.getElementById("myPopup").classList.add(element.id);
 	    document.getElementById("myPopup").classList.add("show");
 	}
-	funcion closeAddIngredient()
+	function closeAddIngredient()
 	{
 	    document.getElementById("myPopup").classList.remove("show");
 	    document.getElementById("myPopup").classList.remove(myPopup.classList.get(1));
