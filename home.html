@@ -37,10 +37,30 @@
         h1 {
             color: green;
         }
-	#block{
-	    wdisplay: flex;
-  	    justify-content: space-between;
+	#block { /*body may pose problem depend on you context, there is no better then have a specific parent*/
+            white-space: nowrap;
+            overflow-x: auto;
 	}
+
+	#fridge{ /*you can like put each one separately, if the margin for the first element is not wanted*/
+	   display: inline-block;
+	}
+	#pantry{ /*you can like put each one separately, if the margin for the first element is not wanted*/
+	   display: inline-block;
+	   margin-left: 50%; 
+	}
+
+	#head { /*body may pose problem depend on you context, there is no better then have a specific parent*/
+            white-space: nowrap;
+            overflow-x: auto;
+	}
+	header{
+	    display: inline-block;
+	}
+	#addIngredient{
+	    display: inline-block;
+	    margin-left: 15px;
+	}	
     </style>
 </head>
 
@@ -197,7 +217,7 @@
 		}
 	    }
 	}
-	fucntion contains(list, item)
+	function contains(list, item)
 	{
 	    const name = item.children[0].innerHTML;
 	    for(let i = 0; i < list.children.length; i++)
