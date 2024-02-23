@@ -116,14 +116,7 @@
 		var date = line.substring(0, line.indexOf(","));
 		var amount = line.substring(line.indexOf(",") + 1, line.length);			    	
 
-		var contents = '<div id="name">' + name + '</div>
-			<div id="date">' + date + '</div>
-			<div id="amount">
-			    <button id="-" onclick="minuselect(amount.children.value)">-</button> 
-			    <p id="value">' + amount + '</p>
-	    		    <button id="+" onclick="pluselect(amount.children.value)">+</button>
-			    <button id="o" onclick="select(ingredient)">o</button>
-			</div>';
+		var contents = '<div id="name">' + name + '</div><div id="date">' + date + '</div><div id="amount"><button id="-" onclick="minuselect(amount.children.value)">-</button><p id="value">' + amount + '</p><button id="+" onclick="pluselect(amount.children.value)">+</button><button id="o" onclick="select(ingredient)">o</button></div>';
 
 		ingredient.innerHTML = contents;
 	        list.appendChild(ingredient);
@@ -144,14 +137,7 @@
 	    var list = document.getElementById(document.getElementById("myPopup").classList.get(1)).children.list.children[0];
 	    var ingredient = document.createElement("li", {id: "ingredient"});
 	    
-	    var contents = '<div id="name">' + form.name + 
-		'</div><div id="date">' + form.date + 
-		'</div><div id="amount">
-			<button id="-" onclick="minus(amount.children.value)">-</button> 
-			<p id="value">' + form.amount + '</p>
-			<button id="+" onclick="plus(amount.children.value)">+</button>
-			<button id="o" onclick="select(ingredient)">o</button>
-		</div>';
+	    var contents = '<div id="name">' + form.name + '</div><div id="date">' + form.date + '</div><div id="amount"><button id="-" onclick="minus(amount.children.value)">-</button> <p id="value">' + form.amount + '</p><button id="+" onclick="plus(amount.children.value)">+</button><button id="o" onclick="select(ingredient)">o</button></div>';
 
 	    ingredient.innerHTML = contents;
 	    list.appendChild(ingredient);
@@ -204,7 +190,7 @@
 		}
 	    }
 	}
-	function contains(list, item)
+	fucntion contains(list, item)
 	{
 	    const name = item.children[0].innerHTML;
 	    for(let i = 0; i < list.children.length; i++)
