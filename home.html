@@ -6,7 +6,7 @@
     <title> fridgE </title>
     <style>
 	
-	.selected { color: green; }
+	.selected {color: green;}
 	.popup {
             position: fixed;
             z-index: 1;
@@ -30,6 +30,14 @@
             display: block;
             margin: 0 auto;
         }
+	.popup-recipe {
+	    background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888888;
+            width: 50%;
+            font-weight: bolder;
+	}
         .show {
             display: block;
         }
@@ -42,8 +50,12 @@
         }
 	#block {
             width = 100%;
+	    max-height=550px;
 	}
-
+	#back{
+	   right: 15px;
+	   width: 50px;
+	}
 	#fridge{
 	   display: inline-block;
 	   width: 40%;
@@ -77,10 +89,15 @@
 	    color: white;
 	    width: 100%;
             height: 100%;
+	    border-radius: 12px;
 	}
 	html{ height: 100%; }
 	body{ min-height: 90%;}
 	#foot{margin-bottom: 50px;}
+	#list{margin-left:10%; min-width:550px; min-height: 550px; max-height: 550px; overflow-y: scroll; overflow-x:scroll; background-color: #d1ffbf; color: black;}
+	.item{margin: 5px; height: 50px; display:inline-block;}
+	.ibutton{margin: 3px; height: 25px; width: 25px; display:inline-block;}
+	#amount{min-width: 100px; max-height: 50px; display:inline-block;}
     </style>
 </head>
 
@@ -93,7 +110,38 @@
 	        <button id="addIngredient" onclick="addIngredient(document.getElementById('fridge'));">Add Ingredient</button> 	
             </div>
 	    <div id="list">
-	    	<ul onload="initList(document.getElementById('fridge'));"></ul> 	
+	    	<ul id="fridge_ul" onload="initList(document.getElementById('fridge'));">
+			<li>
+				<div id="name" class="item">radish</div><div id="date" class="item">2/18/24</div><div id="amount"><button id="-" class="ibutton" onclick="minus(this.parentElement.children.value)">-</button><p id="value" class="item">5</p><button id="+" class="ibutton" onclick="plus(this.parentElement.children.value)">+</button><button id="o" class="ibutton" onclick="select(this)">o</button></div>
+			</li>
+			<li>
+				<div id="name" class="item">cheddar</div><div id="date" class="item">2/10/24</div><div id="amount"><button id="-" class="ibutton" onclick="minus(this.parentElement.children.value)">-</button><p id="value" class="item">1</p><button id="+" class="ibutton" onclick="plus(this.parentElement.children.value)">+</button><button id="o" class="ibutton" onclick="select(this)">o</button></div>
+			</li>	
+			<li>
+				<div id="name" class="item">celery</div><div id="date" class="item">2/18/24</div><div id="amount"><button id="-" class="ibutton" onclick="minus(this.parentElement.children.value)">-</button><p id="value" class="item">2</p><button id="+" class="ibutton" onclick="plus(this.parentElement.children.value)">+</button><button id="o" class="ibutton" onclick="select(this)">o</button></div>
+			</li>
+			<li>
+				<div id="name" class="item">pork belly</div><div id="date" class="item">2/25/24</div><div id="amount"><button id="-" class="ibutton" onclick="minus(this.parentElement.children.value)">-</button><p id="value" class="item">2 lbs</p><button id="+" class="ibutton" onclick="plus(this.parentElement.children.value)">+</button><button id="o" class="ibutton" onclick="select(this)">o</button></div>
+			</li>
+			<li>
+				<div id="name" class="item">ginger</div><div id="date" class="item">2/10/24</div><div id="amount"><button id="-" class="ibutton" onclick="minus(this.parentElement.children.value)">-</button><p id="value" class="item">3</p><button id="+" class="ibutton" onclick="plus(this.parentElement.children.value)">+</button><button id="o" class="ibutton" onclick="select(this)">o</button></div>
+			</li>
+			<li>
+				<div id="name" class="item">collard greens</div><div id="date" class="item">2/18/24</div><div id="amount"><button id="-" class="ibutton" onclick="minus(this.parentElement.children.value)">-</button><p id="value" class="item">3 bunches</p><button id="+" class="ibutton" onclick="plus(this.parentElement.children.value)">+</button><button id="o" class="ibutton" onclick="select(this)">o</button></div>
+			</li>
+			<li>
+				<div id="name" class="item">butter</div><div id="date" class="item">2/10/24</div><div id="amount"><button id="-" class="ibutton" onclick="minus(this.parentElement.children.value)">-</button><p id="value" class="item">4 sticks</p><button id="+" class="ibutton" onclick="plus(this.parentElement.children.value)">+</button><button id="o" class="ibutton" onclick="select(this)">o</button></div>
+			</li>	
+			<li>
+				<div id="name" class="item">carrots</div><div id="date" class="item">2/10/24</div><div id="amount"><button id="-" class="ibutton" onclick="minus(this.parentElement.children.value)">-</button><p id="value" class="item">12</p><button id="+" class="ibutton" onclick="plus(this.parentElement.children.value)">+</button><button id="o" class="ibutton" onclick="select(this)">o</button></div>
+			</li>	
+			<li>
+				<div id="name" class="item">salami</div><div id="date" class="item">2/18/24</div><div id="amount"><button id="-" class="ibutton" onclick="minus(this.parentElement.children.value)">-</button><p id="value" class="item">1</p><button id="+" class="ibutton" onclick="plus(this.parentElement.children.value)">+</button><button id="o" class="ibutton" onclick="select(this)">o</button></div>
+			</li>	
+			<li>
+				<div id="name" class="item">roast beef</div><div id="date" class="item">2/18/24</div><div id="amount"><button id="-" class="ibutton" onclick="minus(this.parentElement.children.value)">-</button><p id="value" class="item">1</p><button id="+" class="ibutton" onclick="plus(this.parentElement.children.value)">+</button><button id="o" class="ibutton" onclick="select(this)">o</button></div>
+			</li>	
+		</ul> 	
 	    </div>
         </div>
         <div id="pantry">
@@ -102,13 +150,23 @@
 	        <button id="addIngredient" onclick="addIngredient(document.getElementById('pantry'));">Add Ingredient</button> 	
             </div>
 	    <div id="list">
-		<ul onload="initList(document.getElementById('pantry'));"></ul> 
+		<ul id="pantry_ul" onload="initList(document.getElementById('pantry'));">
+			<li>
+				<div id="name" class="item">rice</div><div id="date" class="item">10/10/23</div><div id="amount"><button id="-" class="ibutton" onclick="minus(this.parentElement.children.value)">-</button><p id="value" class="item"></p><button id="+" class="ibutton" onclick="plus(this.parentElement.children.value)">+</button><button id="o" class="ibutton" onclick="select(this)">o</button></div>
+			</li>
+			<li>
+				<div id="name" class="item">sugar</div><div id="date" class="item">10/10/23</div><div id="amount"><button id="-" class="ibutton" onclick="minus(this.parentElement.children.value)">-</button><p id="value" class="item">5 cups</p><button id="+" class="ibutton" onclick="plus(this.parentElement.children.value)">+</button><button id="o" class="ibutton" onclick="select(this)">o</button></div>
+			</li>
+			<li>
+				<div id="name" class="item">potatoes</div><div id="date" class="item">1/30/24</div><div id="amount"><button id="-" class="ibutton" onclick="minus(this.parentElement.children.value)">-</button><p id="value" class="item">10</p><button id="+" class="ibutton" onclick="plus(this.parentElement.children.value)">+</button><button id="o" class="ibutton" onclick="select(this)">o</button></div>
+			</li>
+		</ul> 
 	    </div>
         </div>
     </div>
     <div id="foot">
 	<div id="selected" visibility="hidden">
-	    <ul id="fridge"></ul>
+	    <ul id="fridge" visibility="hidden"></ul>
 	    <ul id="pantry"></ul>
 	</div>
 	<button id="remove" onClick="removeIngredients(document.getElementById('foot').children[0])">Remove</button>
@@ -121,7 +179,7 @@
 	    <h1 style="color:green;">
 		Add Ingredient
 	    </h1>
-	    <form method="post" id="addForm">             
+	    <form method="post" id="addForm" onsubmit="return add(document.getElementById('addForm'));">             
 		<label for="name">Ingredient Name:</label>
 		<div class="error" id="name-error">Name is a required field.</div>
 		<input type="text" name="name" id="name">	    	
@@ -132,13 +190,70 @@
 		<label for="amount">Amount:</label>
 		<input type="text" name="amount" id="amount">
 
-		<input type="submit" value="Add" onclick="add(document.getElementById('addForm');">  
+		<input type="submit" value="Add">  
 		<div class="back" onclick="closeAddIngredient();">Back</div>
 	    </form> 
 	</div> 
     </div>
-
+    
+    <!-- Search Recipe Popup -->
+    <div id="recipePopup" class="popup">
+	<div class="popup-content">
+	    <button id="back" onclick="closeSearch()">Back</button>
+	    <h1 style="color:green;">
+		Recipes Containing:
+	    </h1>
+	    <p id="selected_ingredients">
+	    </p>
+	    <ul id="recipes">
+		<li class="recipe">
+			<h1>Radish Soup</h1>
+			<p>Ingredients: 5 Radishes, 1/2 cup Celery, 1 Onion, Chicken Broth</p>
+		</li>
+		<li class="recipe">
+			<h1>Radish Salad</h1>
+			<p>Ingredients: 5 Radishes, 1/2 Iceberg Lettuce, 2 Carrots, 1 tbsp Baslamic Vinegar, 1 tsp Honey</p>
+		</li>
+		<li class="recipe">
+			<h1>Roasted Roots</h1>
+			<p>Ingredients: 3 Potatoes, 3 Carrots, 2 Turnips, 3 Radishes</p>
+		</li>
+		<li class="recipe">
+			<h1>Whole Raw Radish</h1>
+			<p>Ingredients: 1 Radish</p>
+		</li>
+	    </ul>
+	</div> 
+    </div>
     <script>
+	function searchIngredients(list)
+	{
+	    document.getElementById("recipePopup").classList.add("show");
+	    loadSelected(); 
+	}
+	function closeSearch()
+	{
+	    document.getElementById("recipePopup").classList.remove("show");
+	    list = document.getElementById("selected_ingredients");
+	    list.innerHTML = "";
+	}
+	function loadSelected()
+	{
+	    list = document.getElementById("selected_ingredients");
+	    fridge = document.getElementById("fridge_ul").children;
+	    pantry = document.getElementById("pantry_ul").children;
+
+	    for(var i = 0; i < fridge.length; i++)
+		if(fridge[i].children[2].children[3].classList.contains("selected"))
+			list.innerHTML = list.innerHTML + fridge[i].children[0].innerHTML + ', ';
+
+	    for(var i = 0; i < pantry.length; i++)
+		if(pantry[i].children[2].children[3].classList.contains("selected"))
+			list.innerHTML = list.innerHTML + pantry[i].children[0].innerHTML + ', ';
+
+	    if(list.innerHTML.length>0)
+		list.innerHTML = list.innerHTML.substring(0, list.innerHTML.length-2);
+	}   
 	function initList(element)
 	{
 	    const fs = require('fs');
@@ -160,7 +275,7 @@
 		var date = line.substring(0, line.indexOf(","));
 		var amount = line.substring(line.indexOf(",") + 1, line.length);			    	
 
-		var contents = '<div id="name">' + name + '</div><div id="date">' + date + '</div><div id="amount"><button id="-" onclick="minuselect(amount.children.value)">-</button><p id="value">' + amount + '</p><button id="+" onclick="pluselect(amount.children.value)">+</button><button id="o" onclick="select(ingredient)">o</button></div>';
+		var contents = '<div id="name">' + name + '</div><div id="date">' + date + '</div><div id="amount"><button id="-" onclick="minus(amount.children.value);">-</button><p id="value">' + amount + '</p><button id="+" onclick="plus(amount.children.value)">+</button><button id="o" onclick="select(this)">o</button></div>';
 
 		ingredient.innerHTML = contents;
 	        list.appendChild(ingredient);
@@ -178,18 +293,57 @@
 	}
 	function add(form)
 	{
-	    var list = document.getElementById(document.getElementById("myPopup").classList.get(1)).children.list.children[0];
+	    var list = document.getElementById(document.getElementById("myPopup").classList[1]).children.namedItem("list").children[0];
 	    var ingredient = document.createElement("li", {id: "ingredient"});
-	    
-	    var contents = '<div id="name">' + form.name + '</div><div id="date">' + form.date + '</div><div id="amount"><button id="-" onclick="minus(amount.children.value)">-</button> <p id="value">' + form.amount + '</p><button id="+" onclick="plus(amount.children.value)">+</button><button id="o" onclick="select(ingredient)">o</button></div>';
 
-	    ingredient.innerHTML = contents;
-	    list.appendChild(ingredient);
+	    var name = document.createElement("div", {id: "ingredient"});
+		name.id = "ingredient";
+		name.classList.add("item");
+	        name.innerHTML = form.name.value;
+	
+	    var date = document.createElement("div", {id: "date"});
+		date.id = "date";
+		date.classList.add("item");
+		date.innerHTML = form.date.value;
 
-	    var fs = require('fs');
-	    fs.appendFile(document.getElementById("myPopup").classList.get(1) + ".txt", form.name + "," + form.date + "," + form.amount, function(err) {if(err) {alert("Error adding " + form.name);}});
+	    var amount = document.createElement("div", {id: "amount"});
+		amount.id = "amount";
+	    var minus = document.createElement("button", {id: "-"});
+		minus.id = '-';
+		minus.classList.add('ibutton');
+		minus.onclick = "minus(this.parentElement.children.value)";
+		minus.innerHTML = "-";
+	    var value = document.createElement("p", {id: "value"});
+		value.id = 'value';
+		value.classList.add('item');
+		value.innerHTML = form.amount.value;
+	    var plus = document.createElement("button", {id: "+"});
+		plus.id = '+';
+		plus.classList.add('ibutton');
+		plus.onclick = "plus(this.parentElement.children.value)";
+		plus.innerHTML = "+";
+	    var select = document.createElement("button", {id: "o"});
+		select.id = 'o';
+		select.classList.add('ibutton');
+		select.onclick="select(this)";
+		select.innerHTML = "o";
+
+		amount.appendChild(minus);
+		amount.appendChild(value);
+		amount.appendChild(plus);
+		amount.appendChild(select);
+
+		ingredient.appendChild(name);
+		ingredient.appendChild(date);
+		ingredient.appendChild(amount);
+	
+	    	list.appendChild(ingredient);
+
+	    //var fs = require('fs');
+	    //fs.appendFile(document.getElementById("myPopup").classList.get(1) + ".txt", form.name + "," + form.date + "," + form.amount, function(err) {if(err) {alert("Error adding " + form.name);}});
 
 	    closeAddIngredient();	
+	    return false;
 	}
 	function plus(value)
 	{
@@ -205,8 +359,14 @@
 	}	
 	function select(ingredient)
 	{
-	    var selected = document.getElementById("foot").children[0].children.namedItem(ingredient.parent.parent.id);
-	    if(!contains(selected, ingredient))
+	    if(!ingredient.classList.contains("selected"))
+		ingredient.classList.add("selected");
+	    else
+		ingredient.classList.remove("selected");
+	    //ingredient.classList.add("selected");
+	    /*
+	    var selected = document.getElementById("foot").children[0].children.namedItem(ingredient.parentElement.parentElement.parentElement.id);
+	    if(selected == null || !contains(selected, ingredient))
 	    {
 	    	selected.appendChild(ingredient);
 		ingredient.lastChild.lastChild.classList.add("selected");
@@ -216,14 +376,12 @@
 	        selected.removeChild(ingredient);
 		ingredient.lastChild.lastChild.classList.remove("selected");
 	    }
+	    */
 	}
 	function removeIngredients(list)
 	{
 	    remove(list.children[0]);
 	    remove(list.children[1]);
-	}
-	function searchIngredients(list)
-	{
 	}
 	function remove(removelist)
 	{
